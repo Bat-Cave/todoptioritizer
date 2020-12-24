@@ -1,38 +1,157 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.App{
+  width: 100%;
   min-height: 100vh;
+  padding: 7.5%;
+  display: flex;
+  justify-content: center;
+  background: wheat;
+  position: relative;
+}
+
+.Home{
+  width: 100%;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-items: flex-start;
+  border-radius: 20px;
+  backdrop-filter: saturate(80%);
+  box-shadow: 0 0 16px 2px black;
+}
+
+.task-adder{
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: wheat;
+  border-radius: 20px;
+}
+
+.task-adder input{
+  border: none;
+  border-bottom: 2px solid black;
+  width: calc(100% - 108px);
+  height: 30px;
+}
+
+.task-container{
+  width: calc(100% - 46px);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 8px 16px;
+  padding: 16px;
+  cursor: pointer;
+  background: whitesmoke;
+  position: relative;
+  z-index: -1;
+}
+
+.task-container::before{
+  content: attr(data-priority);
+  position: absolute;
+  left: -25px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.task-list{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 16px;
+  z-index: 1;
+}
+
+.checked{
+  border: 2px solid dimgray;
+  background: darkcyan;
+  color: dimgray;
+  text-decoration: line-through;
+}
+
+.add-task{
+  width: 100px;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background: white;
+  z-index: 10;
+}
+
+input{
+  background: transparent;
+  color: black;
+}
+
+
+input:active{
+  outline: none;
+}
+
+input:focus{
+  outline: none;
+}
+
+.remove{
+  border: 2px solid black;
+  width: 20px;
+  height: 20px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  z-index: 10;
 }
 
-.App-link {
-  color: #61dafb;
+button:focus{
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-clone{
+  width: calc(100% - 46px);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 4px 8px;
+  padding: 8px;
+  cursor: pointer;
+  background: whitesmoke;
+  position: relative;
+
+}
+
+*::-webkit-scrollbar{
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track{
+  background: wheat;
+}
+
+*::-webkit-scrollbar-thumb{
+  background: tomato;
+  border-radius: 4px;
 }
