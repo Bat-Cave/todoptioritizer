@@ -23,6 +23,18 @@ const Home = () => {
     }
   }
 
+  // const toggleCompleted = (id) => {
+  //   let curr = tasks;
+  //   let completed;
+  //   curr.forEach((t, i) => {
+  //     if (t.id === id) {
+  //       completed = t.completed;
+  //       curr[i].completed = !completed;
+  //     }
+  //   })
+  //   updateTasks(curr)
+  // }
+
   const handleTaskNameInput = (text) => {
     setTaskName(text)
   }
@@ -55,12 +67,22 @@ const Home = () => {
   let renderedTasks = tasks.map((task, index) => {
     return (
       <Draggable key={task.name} draggableId={task.name} index={index}>
-        {(provided) => (
-          <div className='task-container' data-priority={index + 1} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <p>{task.name}</p>
-            <button className='remove' onClick={() => updateTasks(tasks.filter(t => t.name !== task.name))}>&times;</button>
-          </div>
-        )}
+        {(provided) => {
+          return (
+            <div className='task-container' data-priority={index + 1} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+              <div className="task-info" id={'task-class-' + task.name}>
+                <p className='checkbox' style={{ textDecoration: "none" }}></p>
+                <p>{task.name}</p>
+                <div className='film' onClick={() => {
+                  document.getElementById('task-class-' + task.name).classList.toggle('line-through')
+                }}></div>
+              </div>
+              <div className='task-operations'>
+                <button className='remove' onClick={() => updateTasks(tasks.filter(t => t.name !== task.name))}>&times;</button>
+              </div>
+            </div>
+          )
+        }}
       </Draggable>
     )
   })
@@ -79,8 +101,14 @@ const Home = () => {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <p>{provided.draggableProps["data-rbd-draggable-id"]}</p>
-            <button className='remove'>&times;</button>
+            <div className="task-info">
+              <p className='checkbox' style={{ textDecoration: "none" }}></p>
+              <p>{provided.draggableProps["data-rbd-draggable-id"]}</p>
+              <div className='film'></div>
+            </div>
+            <div className='task-operations'>
+              <button className='remove'>&times;</button>
+            </div>
           </div>
         )
         }>
