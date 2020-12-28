@@ -35,6 +35,16 @@ const Home = () => {
   //   updateTasks(curr)
   // }
 
+  window.onscroll = function() {scrollFunction()};
+
+  const scrollFunction = () => {
+    if (document.body.scrollTop > 112 || document.documentElement.scrollTop > 112) {
+      document.getElementById("task-adder").classList.add("full-width-adder");
+    } else {
+      document.getElementById("task-adder").classList.remove("full-width-adder");
+    }
+  }
+
   const handleTaskNameInput = (text) => {
     setTaskName(text)
   }
@@ -69,12 +79,12 @@ const Home = () => {
       <Draggable key={task.name} draggableId={task.name} index={index}>
         {(provided) => {
           return (
-            <div className='task-container' data-priority={index + 1} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+            <div className='task-container' id={'task-container-' + task.name} data-priority={index + 1} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <div className="task-info" id={'task-class-' + task.name}>
                 <p className='checkbox' style={{ textDecoration: "none" }}></p>
                 <p>{task.name}</p>
                 <div className='film' onClick={() => {
-                  document.getElementById('task-class-' + task.name).classList.toggle('line-through')
+                  document.getElementById(`task-container-${task.name}`).classList.toggle('line-through')
                 }}></div>
               </div>
               <div className='task-operations'>
@@ -89,8 +99,8 @@ const Home = () => {
 
   return (
     <div className='Home' onKeyUp={(e) => handleKeyUp(e)}>
-      <div className='task-adder'>
-        <input type='text' placeholder='Name' name='task-name' onChange={(e) => handleTaskNameInput(e.target.value)} value={taskName} autoComplete="off" />
+      <div className='task-adder' id='task-adder'>
+        <input type='text' placeholder='Task Name...' name='task-name' onChange={(e) => handleTaskNameInput(e.target.value)} value={taskName} autoComplete="off" />
         <button className="add-task" onClick={() => addTask(taskName)} >Add Task</button>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
