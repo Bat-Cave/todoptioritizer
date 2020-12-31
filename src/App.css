@@ -12,9 +12,9 @@ body{
 button{
   cursor: pointer;
   transition: all .25s ease;
-  background: #f2709c;
-  background: -webkit-linear-gradient(to bottom, #ff9472, #f2709c);  
-  background: linear-gradient(to bottom, #ff9472, #f2709c); 
+  background: #005AA7;
+  background: -webkit-linear-gradient(to bottom, #FFFDE4, #005AA7);
+  background: linear-gradient(to bottom, #FFFDE4, #005AA7);
   box-shadow: inset 0 30px 0 0 white;
   border: 2px solid black;
   border-radius: 5px;
@@ -22,11 +22,10 @@ button{
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   right: 8px;
 }
 
-button:hover, button:focus{
+button:hover{
   box-shadow: inset 0 0 0 0 white;
   color: white;
 }
@@ -34,25 +33,29 @@ button:hover, button:focus{
 .App{
   width: 100%;
   min-height: 100vh;
-  padding: 128px;
+  padding: 32px 128px;
   display: flex;
   justify-content: center;
-  background: #f2709c;
-  background: -webkit-linear-gradient(to bottom, #ff9472, #f2709c);  
-  background: linear-gradient(to bottom, #ff9472, #f2709c); 
-  position: relative;
+  background: #005AA7;
+  background: -webkit-linear-gradient(to bottom, #FFFDE4, #005AA7);
+  background: linear-gradient(to bottom, #FFFDE4, #005AA7);
+   
 }
 
 .Home{
   width: 100%;
   min-height: 200px;
+  min-width: 572px;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-items: flex-start;
   border-radius: 20px;
-  backdrop-filter: invert(100%) hue-rotate(50deg);
+  background: #005AA7;
+  /* backdrop-filter: invert(60%) hue-rotate(50deg); */
   box-shadow: 0 0 16px 2px black;
+  position: relative;
+  z-index: 1;
 }
 
 .task-adder{
@@ -90,30 +93,45 @@ button:hover, button:focus{
 }
 
 .task-container{
-  width: calc(100% - 60px);
-  height: 50px;
+  width: 100%;
+  min-width: 482px;
+  min-height: 56px;
+  height: 56px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
   border: 2px solid black;
   border-radius: 8px;
-  margin: 8px 16px;
+  margin: 4px 0;
+  padding: 0px 16px 13px 16px;
   cursor: pointer;
   background: whitesmoke;
   position: relative;
-  z-index: -1;
+  z-index: 10;
+  overflow: hidden;
+  transition: height .25s ease;
 }
 
-.task-container::before{
-  content: attr(data-priority);
-  position: absolute;
-  left: -52px;
-  top: 10px;
-  width: 40px;
+.task-number{
+  margin: 0 4px;
+  width: 20px;
+  height: 100%;
   display: flex;
-  justify-content: flex-end;
-  font-size: 20px;
-  color: white;
+  align-items: center;
+}
+
+.task-top{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin: 13px 0;
+}
+
+.compressed{
+  height: 50px;
+  transition: all .25s ease;
 }
 
 .task-list{
@@ -157,33 +175,100 @@ input:focus{
   height: 30px;
 }
 
+.sub-tasks{
+  width: calc(100% - 30px);
+  height: 100%;
+  margin-top: 8px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.sub-task{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;;
+}
+
+.add-sub-task{
+  width: 30px;
+  height: 30px;
+}
+
+.sub-task-adder{
+  width: calc(100% - 30px);
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: transparent;
+  z-index: 100;
+  margin-left: 30px;
+}
+
+.sub-task-adder  input{
+  border: none;
+  border-bottom: 2px solid black;
+  width: calc(100% - 108px);
+  height: 30px;
+  font-size: 18px;
+}
+
 button:focus{
   outline: none;
 }
 
 .task-info{
-  height: 100%;
+  height: 20px;
   width: 85%;
+  min-width: 300px;
   display: flex;
   align-items: center;
   position: relative;
   border-radius: 8px;
-  margin: 16px;
 }
 
 .film{
   position: absolute;
   width: calc(100% + 30px);
-  height: 100%;
-  left: -16px;
-  top: 0;
+  height: calc(100% + 30px);
+  left: -15px;
+  top: -15px;
+  background: transparent;
+}
+
+.sub-task .film{
+  position: absolute;
+  width: calc(100%);
+  height: calc(100% + 16px);
+  left: 0px;
+  top: -8px;
   background: transparent;
 }
 
 .task-operations{
   width: 15%;
+  min-width: 150px;
+  height: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+
+.percent{
+  text-align: right;
+  position: relative;
+  right: 8px;
+  width: 100px;
 }
 
 .checkbox{
@@ -195,6 +280,7 @@ button:focus{
   display: flex;
   align-items: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .line-through{
@@ -247,6 +333,75 @@ button:focus{
 }
 
 *::-webkit-scrollbar-thumb{
-  background: white;
+  background: black;
   border-radius: 4px;
+}
+
+.burritos{
+  position: fixed;
+  top: 128px;
+  right: 32px;
+  width: 250px;
+  height: auto;
+  z-index: 10000;
+}
+
+.burrito{
+  width: 100%;
+  height: 75px;
+  border: 2px solid dark;
+  border-radius: 5px;
+  padding: 8px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: burrito 3s;
+  transition: all .25s ease;
+  margin: 4px;
+  margin-top: 50px;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+@keyframes burrito {
+  0%{
+    background: white;
+    color: transparent;
+    opacity: 0;
+    height: 75px;
+    border: 2px solid black;
+    border-radius: 0px;
+    padding: 0px;
+  }
+  15%{
+    margin-top: 4px;
+    background: white;
+    opacity: 1;
+    height: 75px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 8px;
+  }
+  85%{
+    margin-top: 4px;
+    background: white;
+    opacity: 1;
+    height: 75px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 8px;
+  }
+  100%{
+    margin-top: 4px;
+    background: white;
+    color: transparent;
+    opacity: 0;
+    height: 0px;
+    border: 0px solid transparent;
+    border-radius: 0px;
+    padding: 0px;
+  }
 }
