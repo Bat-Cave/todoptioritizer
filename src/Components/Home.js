@@ -169,8 +169,9 @@ const Home = () => {
     let burro = document.createElement("div")
     let error = document.createElement("p")
     let name = document.createElement("p")
-    burro.className = "burrito"
+    burro.className = `burrito ${burrtype.toLowerCase()}`
     error.innerHTML = `${burrtype}`
+    error.className = `${burrtype.toLowerCase()}`
     name.innerHTML = `${burr}`
 
     burro.appendChild(error)
